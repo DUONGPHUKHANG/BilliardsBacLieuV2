@@ -13,14 +13,14 @@ namespace BilliardsManagement.Controllers
         {
             _roleService = roleService;
         }
-
+        //lấy tất cả các role
         [HttpGet]
         public IActionResult GetRoles()
         {
             var roles = _roleService.GetRoles();
             return Ok(roles);
         }
-
+        //lấy role
         [HttpGet]
         [Route("{id:guid}")]
         public IActionResult GetRole([FromRoute]Guid id)
@@ -32,7 +32,19 @@ namespace BilliardsManagement.Controllers
             }
             return Ok(roles);
         }
+        // tạo mới Role
+        [HttpPost]
+        public IActionResult CreateRole([FromBody] string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return BadRequest("tên Role không được để trống");
+            }
 
+            var newRole = _roleService.CreateRole(name);
+            return CreatedAtAction(nameof(GetRole), new { id = newRole.Id }, newRole);
+        }
+        //xóa Role
         [HttpDelete]
         [Route("{id:guid}")]
         public IActionResult DeleteRole([FromRoute] Guid id)
@@ -40,5 +52,6 @@ namespace BilliardsManagement.Controllers
             _roleService.DeleteRole(id);
             return NoContent();
         }
+        
     }
 }

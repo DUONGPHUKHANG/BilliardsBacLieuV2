@@ -24,7 +24,16 @@ namespace BilliardsManagement.Services.implementations
             var role = _context.Roles.FirstOrDefault(x => x.Id.Equals(id));
             return role ?? null!;
         }
-
+        public Role CreateRole(String name)
+        { 
+            var role = new Role {
+                Id = Guid.NewGuid(),
+                Name = name 
+            };
+            _context.Roles.Add(role);
+            _context.SaveChanges();
+            return role;
+        }
         public void DeleteRole(Guid id)
         {
             var role = _context.Roles.FirstOrDefault(x => x.Id.Equals(id));
@@ -35,5 +44,6 @@ namespace BilliardsManagement.Services.implementations
             _context.Roles.Remove(role);
             _context.SaveChanges();
         }
+        
     }   
 }
