@@ -1,0 +1,28 @@
+﻿using BilliardsManagement.Entities;
+using BilliardsManagement.Services.Interfaces;
+
+namespace BilliardsManagement.Services.implementations
+{
+    public class RoleService :IRoleService
+    {
+        private readonly BilliardsManagementContext _context;
+
+        //Dependency Injection (DI)
+        public RoleService(BilliardsManagementContext context)
+        {
+            _context = context;
+        }         
+        public ICollection<Role> GetRoles()
+        {
+            var roles = _context.Roles.ToList();
+            return roles;
+        }
+
+        public Role? GetRole(Guid id)
+        {
+            // LinQ
+            var role = _context.Roles.FirstOrDefault(x => x.Id.Equals(id));
+            return role ?? null!;
+        }
+    }   
+}

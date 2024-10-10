@@ -1,0 +1,6 @@
+@BilliardsManagement_HostAddress = http://localhost:5192
+
+GET {{BilliardsManagement_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
