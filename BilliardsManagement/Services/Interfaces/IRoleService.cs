@@ -6,5 +6,6 @@ namespace BilliardsManagement.Services.Interfaces
     {
         ICollection<Role> GetRoles();
         Role? GetRole(Guid id);
+        void DeleteRole(Guid id);
     }
 }

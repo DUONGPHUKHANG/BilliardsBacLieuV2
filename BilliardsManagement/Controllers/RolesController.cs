@@ -22,11 +22,23 @@ namespace BilliardsManagement.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{id:guid}")]
         public IActionResult GetRole([FromRoute]Guid id)
         {
-            var role = _roleService.GetRole(id);
-            return Ok(role);
+            var roles = _roleService.GetRole(id);
+            if (roles == null)
+            {
+                return NotFound("Đồ ngu đồ ăn hại");
+            }
+            return Ok(roles);
+        }
+
+        [HttpDelete]
+        [Route("{id:guid}")]
+        public IActionResult DeleteRole([FromRoute] Guid id)
+        {
+            _roleService.DeleteRole(id);
+            return NoContent();
         }
     }
 }

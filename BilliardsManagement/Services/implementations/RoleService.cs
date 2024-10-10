@@ -24,5 +24,16 @@ namespace BilliardsManagement.Services.implementations
             var role = _context.Roles.FirstOrDefault(x => x.Id.Equals(id));
             return role ?? null!;
         }
+
+        public void DeleteRole(Guid id)
+        {
+            var role = _context.Roles.FirstOrDefault(x => x.Id.Equals(id));
+            if (role == null)
+            {
+                return;
+            } 
+            _context.Roles.Remove(role);
+            _context.SaveChanges();
+        }
     }   
 }
