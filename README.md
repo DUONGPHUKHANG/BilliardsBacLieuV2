@@ -1,1 +1,1 @@
-Con Gà tập code C#
+Con Gà code C# làm app Bi-da
